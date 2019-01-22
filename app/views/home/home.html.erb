@@ -1,4 +1,12 @@
 <h1>Welcome To Test Login</h1>
 
-<%= ap current_user %>
-<%= ap @rules %>
+<h2>User <%= current_user.username %> logged in from <%= @remote_ip %> which matched rule(s)</h2>
+
+
+<% if @rules.empty? %>
+  <h3>Denied permissions from all IPs</h3>
+<% end %>
+
+<% @rules.each do |rule| %>
+  <h3><%= rule.cidr %><%= ' => ' %><%= rule.permission %></h3><br/>
+<% end %>
